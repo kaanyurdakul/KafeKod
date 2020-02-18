@@ -86,6 +86,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SiparisForm.resx">
       <DependentUpon>SiparisForm.cs</DependentUpon>
@@ -105,6 +106,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KafeKod.Data\KafeKod.Data.csproj">
+      <Project>{2691e4a6-6423-4d22-895a-6a19b5b726f1}</Project>
+      <Name>KafeKod.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\masabos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\masadolu.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

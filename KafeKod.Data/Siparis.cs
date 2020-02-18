@@ -9,6 +9,10 @@ namespace KafeKod.Data
     public enum SiparisDurum { Aktif, Odendi, Iptal }
     public class Siparis
     {
+        public Siparis()
+        {
+            SiparisDetaylar = new List<SiparisDetay>();
+        }
         public int MasaNo { get; set; }
         public DateTime? AcilisZamani { get; set; }
         public DateTime? KapanisZamani { get; set; }
@@ -16,6 +20,8 @@ namespace KafeKod.Data
         public SiparisDurum Durum { get; set; } // Burayı anlamadım.
 
         public List<SiparisDetay> SiparisDetaylar { get; set; }
+        public decimal OdenenTutar { get; set; }
+        
 
         public string ToplamTutarTL => string.Format("{0:0.00}₺", ToplamTutar());
 
