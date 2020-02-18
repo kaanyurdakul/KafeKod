@@ -104,7 +104,9 @@
             // 
             // btnEkle
             // 
-            this.btnEkle.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnEkle.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnEkle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnEkle.ForeColor = System.Drawing.Color.White;
             this.btnEkle.Location = new System.Drawing.Point(244, 38);
             this.btnEkle.Name = "btnEkle";
             this.btnEkle.Size = new System.Drawing.Size(75, 26);
@@ -126,7 +128,9 @@
             // btnMasaTasi
             // 
             this.btnMasaTasi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMasaTasi.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnMasaTasi.BackColor = System.Drawing.Color.DarkOrange;
+            this.btnMasaTasi.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnMasaTasi.ForeColor = System.Drawing.Color.White;
             this.btnMasaTasi.Location = new System.Drawing.Point(490, 38);
             this.btnMasaTasi.Name = "btnMasaTasi";
             this.btnMasaTasi.Size = new System.Drawing.Size(90, 27);
@@ -162,23 +166,23 @@
             this.label5.Location = new System.Drawing.Point(374, 242);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 21);
+            this.label5.Size = new System.Drawing.Size(153, 21);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Ödeme Tutatı";
+            this.label5.Text = "Ödeme Tutatı:";
             // 
             // lblTutar
             // 
             this.lblTutar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTutar.AutoSize = true;
-            this.lblTutar.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTutar.ForeColor = System.Drawing.Color.White;
+            this.lblTutar.Font = new System.Drawing.Font("Courier New", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblTutar.ForeColor = System.Drawing.Color.Gold;
             this.lblTutar.Location = new System.Drawing.Point(522, 242);
             this.lblTutar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTutar.Name = "lblTutar";
-            this.lblTutar.Size = new System.Drawing.Size(54, 21);
+            this.lblTutar.Size = new System.Drawing.Size(62, 23);
             this.lblTutar.TabIndex = 10;
-            this.lblTutar.Text = "0,7₺";
+            this.lblTutar.Text = "0,0₺";
             // 
             // btnSiparisIptal
             // 
