@@ -16,7 +16,7 @@ namespace KafeKod
     public partial class Form1 : Form
     {
         KafeVeri db;
-        int masaAdet = 20;
+        
 
         public Form1()
         {
@@ -63,16 +63,29 @@ namespace KafeKod
             #endregion
 
             ListViewItem lvi;
-
-            for (int i = 1; i <= masaAdet; i++)
+           
+            for (int i = 1; i <= db.MasaAdet; i++)
             {
          
                 lvi = new ListViewItem("Masa " + i);
-
+                Siparis sip;
                 // i masa no değeri ile kayıtlı bir masa no var mı ?
-                Siparis sip = db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == i);
-               
-            
+                //Siparis sip = db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == i);
+
+                foreach (var item in db.AktifSiparisler)
+                {
+
+                    if (i == item.MasaNo)
+                    {
+                        sip = item;
+                    }
+                    else
+                    {
+                        sip = null;
+                    }
+
+                }
+
                 if (sip==null)
                 {
                     lvi.Tag = i;
@@ -111,6 +124,7 @@ namespace KafeKod
                     db.AktifSiparisler.Add(sip);
                 }
                 SiparisForm frmSiparis = new SiparisForm(db, sip);
+                frmSiparis.MasaTasindi += FrmSiparis_MasaTasindi;
                 frmSiparis.ShowDialog();
 
                 if (sip.Durum == SiparisDurum.Odendi || sip.Durum == SiparisDurum.Iptal)
@@ -121,7 +135,25 @@ namespace KafeKod
                     db.GecmisSiparisler.Add(sip);
                 }
 
+                
+
             }
+        }
+
+        private void FrmSiparis_MasaTasindi(object sender, MasaTasimaEventArgs e)
+        {
+            // adım 1: eski masayı boşalt
+            ListViewItem lvlEskiMasa = null;
+            foreach (ListViewItem item in lvwMasalar.Items)
+            {
+                if(item.Tag == e.TasinanSiparis)
+                {
+                    lvlEskiMasa = item;
+                    break;
+                }
+            }
+            lvlEskiMasa.Tag = e.EskiMasaNo;
+            lvlEskiMasa.ImageKey = "bos";
         }
 
         private void tsmiGecmisSiparisler_Click(object sender, EventArgs e)

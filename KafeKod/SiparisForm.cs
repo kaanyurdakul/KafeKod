@@ -13,6 +13,9 @@ namespace KafeKod
 {
     public partial class SiparisForm : Form
     {
+
+        public event EventHandler<MasaTasimaEventArgs> MasaTasindi;
+
         KafeVeri db;
         Siparis siparis;
         BindingList<SiparisDetay> blSiparisDetaylar;
@@ -23,11 +26,23 @@ namespace KafeKod
             blSiparisDetaylar =
                 new BindingList<SiparisDetay>(siparis.SiparisDetaylar);
             InitializeComponent();
+            MasaNolariYukle();
             MasaNoGuncelle();
             TutarGuncelle();
             cboUrun.DataSource = db.Urunler;
             cboUrun.SelectedItem = null;
             dgvSiparisDetaylari.DataSource = blSiparisDetaylar;  // data grid view e UrunAD BirimFiyat getirme
+        }
+
+        private void MasaNolariYukle()
+        {
+            for (int i = 0; i < db.MasaAdet; i++)
+            {
+                if (i != siparis.MasaNo)
+                {
+                    cboMasaNo.Items.Add(i);
+                }
+            }
         }
 
         private void TutarGuncelle()
@@ -146,5 +161,38 @@ namespace KafeKod
 
             TutarGuncelle();
         }
+
+        private void btnMasaTasi_Click(object sender, EventArgs e)
+        {
+            if(cboMasaNo.SelectedItem == null)
+            {
+                MessageBox.Show("Lütfen hedef masa noyu seçiniz.");
+                return;
+            }
+
+            int eskiMasaNo = siparis.MasaNo;
+            int hedefMasaNo = (int)cboMasaNo.SelectedItem;
+            if (MasaTasindi != null)
+            {
+                var args = new MasaTasimaEventArgs
+                {
+                    TasinanSiparis = siparis,
+                    EskiMasaNo = eskiMasaNo,
+                    YeniMasaNo = hedefMasaNo
+                };
+                MasaTasindi(this, args);
+            }
+
+            siparis.MasaNo = hedefMasaNo;
+            MasaNoGuncelle();
+            MasaNolariYukle();
+        }
+    }
+
+    public class MasaTasimaEventArgs : EventArgs
+    {
+        public Siparis TasinanSiparis { get; set; }
+        public int EskiMasaNo { get; set; }
+        public int YeniMasaNo { get; set; }
     }
 }

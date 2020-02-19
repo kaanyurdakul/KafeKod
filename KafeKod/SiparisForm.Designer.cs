@@ -152,6 +152,7 @@
             this.btnMasaTasi.TabIndex = 7;
             this.btnMasaTasi.Text = "TAŞI";
             this.btnMasaTasi.UseVisualStyleBackColor = false;
+            this.btnMasaTasi.Click += new System.EventHandler(this.btnMasaTasi_Click);
             // 
             // lblMasaNo
             // 
@@ -262,12 +263,12 @@
             this.cmsSiparisDetay.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiSiparisDetaySil});
             this.cmsSiparisDetay.Name = "cmsSiparisDetay";
-            this.cmsSiparisDetay.Size = new System.Drawing.Size(181, 48);
+            this.cmsSiparisDetay.Size = new System.Drawing.Size(87, 26);
             // 
             // tsmiSiparisDetaySil
             // 
             this.tsmiSiparisDetaySil.Name = "tsmiSiparisDetaySil";
-            this.tsmiSiparisDetaySil.Size = new System.Drawing.Size(180, 22);
+            this.tsmiSiparisDetaySil.Size = new System.Drawing.Size(86, 22);
             this.tsmiSiparisDetaySil.Text = "Sil";
             this.tsmiSiparisDetaySil.Click += new System.EventHandler(this.tsmiSiparisDetaySil_Click);
             // 
