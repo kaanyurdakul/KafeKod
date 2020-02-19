@@ -235,7 +235,7 @@
             this.btnAnasayfa.TabIndex = 13;
             this.btnAnasayfa.Text = "ANASAYFAYA DÖN";
             this.btnAnasayfa.UseVisualStyleBackColor = false;
-            this.btnAnasayfa.Click += new System.EventHandler(this.btnAnasayfa_Click);
+            this.btnAnasayfa.Click += new System.EventHandler(this.btnAnaSayfa_Click);
             // 
             // dgvSiparisDetaylari
             // 

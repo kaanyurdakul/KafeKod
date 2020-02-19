@@ -20,14 +20,14 @@ namespace KafeKod
         {
             db = kafeVeri;
             this.siparis = siparis;
-            blSiparisDetaylar = new BindingList<SiparisDetay>(siparis.SiparisDetaylar);
+            blSiparisDetaylar =
+                new BindingList<SiparisDetay>(siparis.SiparisDetaylar);
             InitializeComponent();
             MasaNoGuncelle();
             TutarGuncelle();
             cboUrun.DataSource = db.Urunler;
             cboUrun.SelectedItem = null;
-            dgvSiparisDetaylari.DataSource = blSiparisDetaylar;
-
+            dgvSiparisDetaylari.DataSource = blSiparisDetaylar;  // data grid view e UrunAD BirimFiyat getirme
         }
 
         private void TutarGuncelle()
@@ -38,48 +38,39 @@ namespace KafeKod
         private void MasaNoGuncelle()
         {
             Text = "Masa " + siparis.MasaNo;
-
             lblMasaNo.Text = siparis.MasaNo.ToString("00");
         }
 
         private void btnEkle_Click(object sender, EventArgs e)
         {
-            if(cboUrun.SelectedItem == null)
+            if (cboUrun.SelectedItem == null)
             {
-                MessageBox.Show("Lütfen bir ürün seçiniz!", "Hata", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Lütfen bir ürün seçiniz !!");
                 return;
             }
-            Urun seciliUrun = (Urun)cboUrun.SelectedItem;
-            var sd = new SiparisDetay
+
+            Urun SeciliUrun = (Urun)cboUrun.SelectedItem;
+            var sipdetay = new SiparisDetay
             {
-                UrunAd = seciliUrun.UrunAd,
-                BirimFiyat = seciliUrun.BirimFiyat,
+                UrunAd = SeciliUrun.UrunAd,
+                BirimFiyat = SeciliUrun.BirimFiyat,
                 Adet = (int)nudAdet.Value
             };
-
-
-
-            blSiparisDetaylar.Add(sd);
-            cboUrun.SelectedItem = null;
+            blSiparisDetaylar.Add(sipdetay);
+            cboUrun.SelectedItem = 0;
             nudAdet.Value = 1;
             TutarGuncelle();
         }
 
-        private void btnAnasayfa_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void btnSiparisIptal_Click(object sender, EventArgs e)
         {
-            var dr = MessageBox.Show
-                (
-                "Sipariş iptal edilecektir. Onaylıyor musunuz?",
+            var dr = MessageBox.Show(
+                "Sipariş iptal edilecektir.! Onaylıyor musunuz ? ",
                 "Sipariş Onayı",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2
-                );
+                MessageBoxDefaultButton.Button2);
+
             if (dr == DialogResult.Yes)
             {
                 siparis.Durum = SiparisDurum.Iptal;
@@ -87,18 +78,22 @@ namespace KafeKod
                 Close();
             }
             siparis.Durum = SiparisDurum.Iptal;
+
+        }
+
+        private void btnAnaSayfa_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void btnOdemeAl_Click(object sender, EventArgs e)
         {
-            var dr = MessageBox.Show
-                (
-                "Ödeme alındıysa masanın hesabı kapatılacaktır. Onaylıyor musunuz?",
-                "Masa Kapatma Onayı",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning,
-                MessageBoxDefaultButton.Button2
-                );
+            var dr = MessageBox.Show(
+               "Ödeme alındıysa masa sonlandırılacaktır.! Onaylıyor musunuz? ",
+               "Masa Kapatma Onayı",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning,
+               MessageBoxDefaultButton.Button2);
 
             if (dr == DialogResult.Yes)
             {

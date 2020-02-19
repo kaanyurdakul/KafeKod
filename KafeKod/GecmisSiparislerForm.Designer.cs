@@ -71,7 +71,7 @@
             this.dgvSiparisler.Name = "dgvSiparisler";
             this.dgvSiparisler.ReadOnly = true;
             this.dgvSiparisler.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSiparisler.Size = new System.Drawing.Size(715, 168);
+            this.dgvSiparisler.Size = new System.Drawing.Size(715, 167);
             this.dgvSiparisler.TabIndex = 1;
             this.dgvSiparisler.SelectionChanged += new System.EventHandler(this.dgvSiparisler_SelectionChanged);
             // 
@@ -105,7 +105,7 @@
             this.dgvSiparisDetayları.Name = "dgvSiparisDetayları";
             this.dgvSiparisDetayları.ReadOnly = true;
             this.dgvSiparisDetayları.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSiparisDetayları.Size = new System.Drawing.Size(715, 172);
+            this.dgvSiparisDetayları.Size = new System.Drawing.Size(715, 173);
             this.dgvSiparisDetayları.TabIndex = 3;
             // 
             // splitContainer1
@@ -127,7 +127,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.dgvSiparisDetayları);
             this.splitContainer1.Size = new System.Drawing.Size(733, 463);
-            this.splitContainer1.SplitterDistance = 230;
+            this.splitContainer1.SplitterDistance = 229;
             this.splitContainer1.TabIndex = 4;
             // 
             // GecmisSiparislerForm

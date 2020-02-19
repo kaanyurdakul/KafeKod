@@ -15,60 +15,57 @@ namespace KafeKod
     {
         KafeVeri db;
         int masaAdet = 20;
-        
+
         public Form1()
         {
             db = new KafeVeri();
-            OrnekVerileriYukle();   
+            OrnekVerileriYukle();
             InitializeComponent();
-            MasalarıOluştur();
+            MasalariOlustur();
+
         }
 
         private void OrnekVerileriYukle()
         {
             db.Urunler = new List<Urun>
-         {
-             new Urun{UrunAd = "Kola", BirimFiyat = 6.99m },
-             new Urun{UrunAd = "Çay", BirimFiyat = 2.99m }
-
-         };
+            {
+                new Urun { UrunAd = "Kola", BirimFiyat = 4.90m },
+                new Urun { UrunAd = "Çay", BirimFiyat = 2.95m }
+            };
         }
 
-        private void MasalarıOluştur()
+        private void MasalariOlustur()
         {
             #region ListView Imajlarının Hazırlanması
             ImageList il = new ImageList();
             il.Images.Add("bos", Properties.Resources.masabos);
             il.Images.Add("dolu", Properties.Resources.masadolu);
-            il.ImageSize = new Size(64, 64);
+            il.ImageSize = new Size(69, 69);
             lvwMasalar.LargeImageList = il;
+
             #endregion
 
             ListViewItem lvi;
             for (int i = 1; i <= masaAdet; i++)
             {
                 lvi = new ListViewItem("Masa " + i);
+                lvi.Tag = i;
                 lvi.ImageKey = "bos";
-                lvi.Tag = i; //etiket mantığı
                 lvwMasalar.Items.Add(lvi);
-            }
-        }
 
-        private void lvwMasalar_DoubleClick(object sender, EventArgs e)
-        {
-            MessageBox.Show("Test");
+            }
         }
 
         private void lvwMasalar_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                var lvi = lvwMasalar.SelectedItems[0];
+                var lvi = lvwMasalar.SelectedItems[0];  //lv item ın ilki dediğimiz için, var ListViewItem oldugunu anladı.
                 lvi.ImageKey = "dolu";
 
                 Siparis sip;
-                // masa doluysa olanı al, boşsa yeni oluştur.
-                if (lvi.Tag is Siparis)
+                // Masa doluysa olanı al, boşsa yeni oluştur.
+                if (lvi.Tag is Siparis)     //boşken yeni açarken masa tag = int. else e düşer.
                 {
                     sip = (Siparis)lvi.Tag;
                 }
@@ -80,12 +77,10 @@ namespace KafeKod
                     lvi.Tag = sip;
                     db.AktifSiparisler.Add(sip);
                 }
-
                 SiparisForm frmSiparis = new SiparisForm(db, sip);
                 frmSiparis.ShowDialog();
 
-
-                if (sip.Durum != SiparisDurum.Odendi || sip.Durum == SiparisDurum.Iptal)
+                if (sip.Durum == SiparisDurum.Odendi || sip.Durum == SiparisDurum.Iptal)
                 {
                     lvi.Tag = sip.MasaNo;
                     lvi.ImageKey = "bos";
@@ -96,11 +91,6 @@ namespace KafeKod
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void tsmiGecmisSiparisler_Click(object sender, EventArgs e)
         {
             var frm = new GecmisSiparislerForm(db);
@@ -108,4 +98,3 @@ namespace KafeKod
         }
     }
 }
-
