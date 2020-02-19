@@ -37,8 +37,8 @@
             // 
             // lvwMasalar
             // 
-            this.lvwMasalar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.lvwMasalar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwMasalar.Location = new System.Drawing.Point(0, 27);
             this.lvwMasalar.Name = "lvwMasalar";
@@ -63,6 +63,7 @@
             this.tsmiUrunler.Name = "tsmiUrunler";
             this.tsmiUrunler.Size = new System.Drawing.Size(58, 20);
             this.tsmiUrunler.Text = "Ürünler";
+            this.tsmiUrunler.Click += new System.EventHandler(this.tsmiUrunler_Click);
             // 
             // tsmiGecmisSiparisler
             // 
@@ -80,6 +81,7 @@
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

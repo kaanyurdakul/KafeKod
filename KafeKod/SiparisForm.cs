@@ -104,5 +104,47 @@ namespace KafeKod
             }
             siparis.Durum = SiparisDurum.Odendi;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (Control item in Controls)
+            {
+                if (item != sender)
+                {
+                    System.Threading.Thread.Sleep(100);
+                    item.Hide();
+                }
+
+            }
+        }
+
+        private void dgvSiparisDetaylari_MouseClick(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                int rowIndex = dgvSiparisDetaylari.HitTest(e.X, e.Y).RowIndex;
+
+                if (rowIndex > -1)
+                {
+                    dgvSiparisDetaylari.ClearSelection();
+                    dgvSiparisDetaylari.Rows[rowIndex].Selected = true;
+                    cmsSiparisDetay.Show(MousePosition);
+
+                }
+            }
+        }
+        private void tsmiSiparisDetaySil_Click(object sender, EventArgs e)
+        {
+            // Seçili elemanı kaldır.
+
+            if(dgvSiparisDetaylari.SelectedRows.Count > 0)
+            {
+                var seciliSatir = dgvSiparisDetaylari.SelectedRows[0];
+                var SipDetay = (SiparisDetay)seciliSatir.DataBoundItem;
+                blSiparisDetaylar.Remove(SipDetay);
+            }
+
+            TutarGuncelle();
+        }
     }
 }

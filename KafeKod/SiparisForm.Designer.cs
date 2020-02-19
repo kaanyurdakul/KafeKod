@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,8 +44,11 @@
             this.btnOdemeAl = new System.Windows.Forms.Button();
             this.btnAnasayfa = new System.Windows.Forms.Button();
             this.dgvSiparisDetaylari = new System.Windows.Forms.DataGridView();
+            this.cmsSiparisDetay = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiSiparisDetaySil = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nudAdet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiparisDetaylari)).BeginInit();
+            this.cmsSiparisDetay.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -251,6 +255,21 @@
             this.dgvSiparisDetaylari.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSiparisDetaylari.Size = new System.Drawing.Size(304, 319);
             this.dgvSiparisDetaylari.TabIndex = 14;
+            this.dgvSiparisDetaylari.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvSiparisDetaylari_MouseClick);
+            // 
+            // cmsSiparisDetay
+            // 
+            this.cmsSiparisDetay.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiSiparisDetaySil});
+            this.cmsSiparisDetay.Name = "cmsSiparisDetay";
+            this.cmsSiparisDetay.Size = new System.Drawing.Size(181, 48);
+            // 
+            // tsmiSiparisDetaySil
+            // 
+            this.tsmiSiparisDetaySil.Name = "tsmiSiparisDetaySil";
+            this.tsmiSiparisDetaySil.Size = new System.Drawing.Size(180, 22);
+            this.tsmiSiparisDetaySil.Text = "Sil";
+            this.tsmiSiparisDetaySil.Click += new System.EventHandler(this.tsmiSiparisDetaySil_Click);
             // 
             // SiparisForm
             // 
@@ -279,6 +298,7 @@
             this.Text = "SiparisForm";
             ((System.ComponentModel.ISupportInitialize)(this.nudAdet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSiparisDetaylari)).EndInit();
+            this.cmsSiparisDetay.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +321,7 @@
         private System.Windows.Forms.Button btnOdemeAl;
         private System.Windows.Forms.Button btnAnasayfa;
         private System.Windows.Forms.DataGridView dgvSiparisDetaylari;
+        private System.Windows.Forms.ContextMenuStrip cmsSiparisDetay;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSiparisDetaySil;
     }
 }

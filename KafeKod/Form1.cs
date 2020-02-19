@@ -1,9 +1,11 @@
 ﻿using KafeKod.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +20,25 @@ namespace KafeKod
 
         public Form1()
         {
-            db = new KafeVeri();
-            OrnekVerileriYukle();
+
+            VerileriOku();
             InitializeComponent();
             MasalariOlustur();
 
+        }
+
+        private void VerileriOku()
+        {
+            try
+            {
+                string json = File.ReadAllText("veri.json");
+                db = JsonConvert.DeserializeObject<KafeVeri>(json);
+            }
+            catch (Exception)
+            {
+
+                db = new KafeVeri();
+            }
         }
 
         private void OrnekVerileriYukle()
@@ -32,6 +48,7 @@ namespace KafeKod
                 new Urun { UrunAd = "Kola", BirimFiyat = 4.90m },
                 new Urun { UrunAd = "Çay", BirimFiyat = 2.95m }
             };
+
         }
 
         private void MasalariOlustur()
@@ -46,11 +63,27 @@ namespace KafeKod
             #endregion
 
             ListViewItem lvi;
+
             for (int i = 1; i <= masaAdet; i++)
             {
+         
                 lvi = new ListViewItem("Masa " + i);
-                lvi.Tag = i;
-                lvi.ImageKey = "bos";
+
+                // i masa no değeri ile kayıtlı bir masa no var mı ?
+                Siparis sip = db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == i);
+               
+            
+                if (sip==null)
+                {
+                    lvi.Tag = i;
+                    lvi.ImageKey = "bos";
+                }
+                else
+                {
+                    lvi.Tag = sip;
+                    lvi.ImageKey = "dolu";
+                }
+
                 lvwMasalar.Items.Add(lvi);
 
             }
@@ -95,6 +128,18 @@ namespace KafeKod
         {
             var frm = new GecmisSiparislerForm(db);
             frm.Show();
+        }
+
+        private void tsmiUrunler_Click(object sender, EventArgs e)
+        {
+            var frm = new UrunlerForm(db);
+            frm.Show();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string json = JsonConvert.SerializeObject(db);
+            File.WriteAllText("veri.json",json);
         }
     }
 }
