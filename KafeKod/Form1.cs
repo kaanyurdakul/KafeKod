@@ -68,23 +68,32 @@ namespace KafeKod
             {
          
                 lvi = new ListViewItem("Masa " + i);
-                Siparis sip;
                 // i masa no değeri ile kayıtlı bir masa no var mı ?
-                //Siparis sip = db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == i);
+                Siparis sip = db.AktifSiparisler.FirstOrDefault(x => x.MasaNo == i);
 
-                foreach (var item in db.AktifSiparisler)
-                {
+                //foreach (var item in db.AktifSiparisler)
+                //{
 
-                    if (i == item.MasaNo)
-                    {
-                        sip = item;
-                    }
-                    else
-                    {
-                        sip = null;
-                    }
+                //    if (i == item.MasaNo)
+                //    {
+                //        sip = item;
+                //    }
+                //    else
+                //    {
+                //        sip = null;
+                //    }
 
-                }
+                //}
+
+
+                //foreach (Siparis item in db.AktifSiparisler)
+                //{
+                //    if (item.MasaNo == i)
+                //    {
+                //        sip = item;
+                //        break;
+                //    }
+                //}
 
                 if (sip==null)
                 {
@@ -124,7 +133,7 @@ namespace KafeKod
                     db.AktifSiparisler.Add(sip);
                 }
                 SiparisForm frmSiparis = new SiparisForm(db, sip);
-                frmSiparis.MasaTasindi += FrmSiparis_MasaTasindi;
+                frmSiparis.MasaTasiniyor += FrmSiparis_MasaTasindi;
                 frmSiparis.ShowDialog();
 
                 if (sip.Durum == SiparisDurum.Odendi || sip.Durum == SiparisDurum.Iptal)
@@ -143,17 +152,33 @@ namespace KafeKod
         private void FrmSiparis_MasaTasindi(object sender, MasaTasimaEventArgs e)
         {
             // adım 1: eski masayı boşalt
-            ListViewItem lvlEskiMasa = null;
-            foreach (ListViewItem item in lvwMasalar.Items)
-            {
-                if(item.Tag == e.TasinanSiparis)
-                {
-                    lvlEskiMasa = item;
-                    break;
-                }
-            }
-            lvlEskiMasa.Tag = e.EskiMasaNo;
-            lvlEskiMasa.ImageKey = "bos";
+            ListViewItem lviEskiMasa = MasaBul(e.EskiMasaNo); // null
+            //foreach (ListViewItem item in lvwMasalar.Items)
+            //{
+            //    if(item.Tag == e.TasinanSiparis)
+            //    {
+            //        lviEskiMasa = item;
+            //        break;
+            //    }
+            //}
+            lviEskiMasa.Tag = e.EskiMasaNo;
+            lviEskiMasa.ImageKey = "bos";
+
+            // adım 2: yeni masaya sipariş koy
+
+            ListViewItem lviYeniMasa = MasaBul(e.YeniMasaNo); //null;
+            //foreach (ListViewItem item in lvwMasalar.Items)
+            //{
+            //    if (item.Tag is int && (int)item.Tag == e.YeniMasaNo)
+            //    {
+            //        lviYeniMasa= item;
+            //        break;
+            //    }
+            //}
+            lviYeniMasa.Tag = e.TasinanSiparis;
+            lviYeniMasa.ImageKey = "dolu";
+
+
         }
 
         private void tsmiGecmisSiparisler_Click(object sender, EventArgs e)
@@ -172,6 +197,22 @@ namespace KafeKod
         {
             string json = JsonConvert.SerializeObject(db);
             File.WriteAllText("veri.json",json);
+        }
+
+        private ListViewItem MasaBul(int masaNo)
+        {
+            foreach (ListViewItem item in lvwMasalar.Items)
+            {
+                if (item.Tag is int && (int)item.Tag == masaNo)
+                {
+                    return item;
+                }
+                else if (item.Tag is Siparis && ((Siparis)item.Tag).MasaNo == masaNo)
+                {
+                    return item;
+                }
+            }
+            return null;
         }
     }
 }
